@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 1208px;
+            height: 778px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/ilevan_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[37.297972497681,41.67844785351772],[39.6360322065803,45.98606554163563]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_EsriTopographic_0');
+        map.getPane('pane_EsriTopographic_0').style.zIndex = 400;
+        var layer_EsriTopographic_0 = L.tileLayer('http://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_EsriTopographic_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 22
+        });
+        layer_EsriTopographic_0;
+        map.addLayer(layer_EsriTopographic_0);
+        map.createPane('pane_YENRASTERVANKORDNATLI_1');
+        map.getPane('pane_YENRASTERVANKORDNATLI_1').style.zIndex = 401;
+        var img_YENRASTERVANKORDNATLI_1 = 'data/YENRASTERVANKORDNATLI_1.png';
+        var img_bounds_YENRASTERVANKORDNATLI_1 = [[37.60944752727056,42.50292777912021],[39.507659293188105,44.71349920436914]];
+        var layer_YENRASTERVANKORDNATLI_1 = new L.imageOverlay(img_YENRASTERVANKORDNATLI_1,
+                                              img_bounds_YENRASTERVANKORDNATLI_1,
+                                              {pane: 'pane_YENRASTERVANKORDNATLI_1'});
+        bounds_group.addLayer(layer_YENRASTERVANKORDNATLI_1);
+        map.addLayer(layer_YENRASTERVANKORDNATLI_1);
+        function pop_ilevan_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>sıra</strong><br />' + (feature.properties['sıra'] !== null ? autolinker.link(feature.properties['sıra'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['x_merkez_d'] !== null ? autolinker.link(feature.properties['x_merkez_d'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['y_merkez_k'] !== null ? autolinker.link(feature.properties['y_merkez_k'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alan'] !== null ? autolinker.link(feature.properties['alan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['çevre'] !== null ? autolinker.link(feature.properties['çevre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kıta'] !== null ? autolinker.link(feature.properties['kıta'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['deniz'] !== null ? autolinker.link(feature.properties['deniz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['konum'] !== null ? autolinker.link(feature.properties['konum'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ortam'] !== null ? autolinker.link(feature.properties['ortam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['coğ_nitel'] !== null ? autolinker.link(feature.properties['coğ_nitel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_niteli'] !== null ? autolinker.link(feature.properties['alt_niteli'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['su_altı'] !== null ? autolinker.link(feature.properties['su_altı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ülke'] !== null ? autolinker.link(feature.properties['ülke'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ülke_adı'] !== null ? autolinker.link(feature.properties['ülke_adı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bölge_tü'] !== null ? autolinker.link(feature.properties['bölge_tü'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bölge_ksl'] !== null ? autolinker.link(feature.properties['bölge_ksl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bölüm_ks'] !== null ? autolinker.link(feature.properties['bölüm_ks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bölge_ad�'] !== null ? autolinker.link(feature.properties['bölge_ad�'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bölüm_ad'] !== null ? autolinker.link(feature.properties['bölüm_ad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['plaka'] !== null ? autolinker.link(feature.properties['plaka'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['il'] !== null ? autolinker.link(feature.properties['il'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ilçe</th>\
+                        <td>' + (feature.properties['ilçe'] !== null ? autolinker.link(feature.properties['ilçe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['yrl_türü'] !== null ? autolinker.link(feature.properties['yrl_türü'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bld_türü'] !== null ? autolinker.link(feature.properties['bld_türü'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['yrl_adı'] !== null ? autolinker.link(feature.properties['yrl_adı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['özel_adı'] !== null ? autolinker.link(feature.properties['özel_adı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alan_adı'] !== null ? autolinker.link(feature.properties['alan_adı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['eski_adı'] !== null ? autolinker.link(feature.properties['eski_adı'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['plaka_ilç'] !== null ? autolinker.link(feature.properties['plaka_ilç'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['il_ilçe'] !== null ? autolinker.link(feature.properties['il_ilçe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['durum'] !== null ? autolinker.link(feature.properties['durum'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['açıklama'] !== null ? autolinker.link(feature.properties['açıklama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_ing'] !== null ? autolinker.link(feature.properties['ad_ing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_arap'] !== null ? autolinker.link(feature.properties['ad_arap'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_yun'] !== null ? autolinker.link(feature.properties['ad_yun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_bul'] !== null ? autolinker.link(feature.properties['ad_bul'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_rus'] !== null ? autolinker.link(feature.properties['ad_rus'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ad_fars'] !== null ? autolinker.link(feature.properties['ad_fars'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ilevan_2_0() {
+            return {
+                pane: 'pane_ilevan_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ilevan_2');
+        map.getPane('pane_ilevan_2').style.zIndex = 402;
+        map.getPane('pane_ilevan_2').style['mix-blend-mode'] = 'normal';
+        var layer_ilevan_2 = new L.geoJson(json_ilevan_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ilevan_2',
+            layerName: 'layer_ilevan_2',
+            pane: 'pane_ilevan_2',
+            onEachFeature: pop_ilevan_2,
+            style: style_ilevan_2_0,
+        });
+        bounds_group.addLayer(layer_ilevan_2);
+        map.addLayer(layer_ilevan_2);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ilevan_2.png" /> ilçe van': layer_ilevan_2,"YENİ RASTER VAN KORDİNATLI": layer_YENRASTERVANKORDNATLI_1,"Esri Topographic": layer_EsriTopographic_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_ilevan_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['ilçe'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['ilçe']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ilevan_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        resetLabels([layer_ilevan_2]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ilevan_2]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ilevan_2]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ilevan_2]);
+        });
+        </script>
+    </body>
+</html>
